@@ -59,14 +59,7 @@ def get_energy(energy_consumed_per_month_in_kwh, solar_power_in_kw, month, year,
     weather_data = fetch_openmeteo_data(month=month, year=year, latitude=latitude, longitude=longitude)
 
     data = {
-        "Hour": [],
-        "temperature_2m": [2.2, 3.5],
-        "precipitation": [2.2, 3.5],
-        "wind_speed_10m": [2.2, 3.5],
-        "shortwave_radiation": [2.2, 3.5],
-        "direct_radiation": [2.2, 3.5],
-        "diffuse_radiation": [2.2, 3.5],
-        "sunshine_duration": [2.2, 3.5]
+        "Hour": []
     }
 
     for index, x in weather_data.iterrows():
