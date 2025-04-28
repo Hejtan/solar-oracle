@@ -37,9 +37,12 @@ export default function Page() {
     const sumOver = energyBalance.filter((x) => x > 0).reduce(sum, 0);
     const sumUnder = energyBalance.filter((x) => x < 0).reduce(sum, 0);
 
+    const energyGivenToGrid = sumOver - (energyConsumption.reduce(sum, 0) + sumUnder)
+    const energyFetchedDirectly = energyConsumption.reduce(sum, 0) + sumUnder
+
     const costWithSolar =
-        sumUnder * query["cost_per_kwh"] -
-        sumOver * query["income_per_kwh"] +
+        -1 * sumUnder * query["cost_per_kwh"] -
+        energyGivenToGrid * query["income_per_kwh"] +
         query["transfer_cost"];
     const costWithoutSolar =
         energyConsumption.reduce(sum, 0) * query["cost_per_kwh"] + query["transfer_cost"];
@@ -88,8 +91,16 @@ export default function Page() {
                     Liczba wyprodukowanych kWh: {sumOver}                    
                 </Typography>
                 <Typography display="block" align="center">
-                    Liczba pobranych kWh: {-1 * sumUnder}                    
+                    Liczba kWh pobranych z sieci: {-1 * sumUnder}                    
                 </Typography>
+                <Typography display="block" align="center">
+                    Liczba kWh oddanych do sieci: {energyGivenToGrid}                    
+                </Typography>
+
+                <Typography display="block" align="center">
+                    Liczba kWh pobranych bezpośrednio z fotowoltaiki: {energyFetchedDirectly}                    
+                </Typography>
+
             </Paper>
         </div>
     );
