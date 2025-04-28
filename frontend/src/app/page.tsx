@@ -7,7 +7,8 @@ const unit = (unit: string) => ({
     input: {
         endAdornment: <InputAdornment position="end">{unit}</InputAdornment>,
     },
-});
+    htmlInput: { step: 0.01}
+} as const);
 
 export default function Home() {
     const router = useRouter();

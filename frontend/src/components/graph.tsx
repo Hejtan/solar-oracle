@@ -39,10 +39,14 @@ export const Graph: React.FC<Props> = ({ color, data, year, month, label, unit }
         <Paper sx={{ p: 2 }}>
             <Typography variant="h6">{label}</Typography>
             <LineChart
-                xAxis={[{ data: getHoursInMonth(year, month).concat(getHoursInMonth(year, month+1)), scaleType: 'time',
-                    min: new Date(year, month, 1),
-                    max: new Date(year, month + 1),
-                    valueFormatter: (date: Date) => date.getDate() + "-" + date.getMonth() }]}
+                xAxis={[{ data: getHoursInMonth(year, month - 1), scaleType: 'time',
+                    min: new Date(year, month - 1, 1, 0, 0, 0, 0),
+                    max: new Date(year, month, 1, 0, 0, 0, 0),
+                    // valueFormatter: (date: Date) => date.getDate() + "-" + date.getMonth(), 
+                    
+                }
+                ]}
+
                 yAxis={[{label: `${label} (${unit})`}]}
                 series={[
                     {
@@ -51,6 +55,7 @@ export const Graph: React.FC<Props> = ({ color, data, year, month, label, unit }
                         area: true,
                         data: data,
                         valueFormatter: (val) => `${val}${unit}`,
+                        showMark: false,
                     },
                 ]}
                 height={300}
