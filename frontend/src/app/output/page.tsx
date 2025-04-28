@@ -60,21 +60,21 @@ export default function Page() {
                 color="green"
                 data={energyProd}
                 label="Produkcja energii"
-                unit="kwH"
+                unit="kWh"
                 {...dirtyHackProps}
             />
             <Graph
                 color="orange"
                 data={energyConsumption}
                 label="Konsumpcja energii"
-                unit="kwH"
+                unit="kWh"
                 {...dirtyHackProps}
             />
             <Graph
                 color="red"
                 data={energyBalance}
                 label="Bilans energii"
-                unit="kwH"
+                unit="kWh"
                 {...dirtyHackProps}
             />
             <Paper>
@@ -88,22 +88,19 @@ export default function Page() {
                     Opłata bez inwestycji w fotowoltaikę: {pln.format(costWithoutSolar)}
                 </Typography>
                 <Typography display="block" align="center">
-                    Liczba wyprodukowanych kWh: {sumOver}                    
+                    Liczba wyprodukowanych kWh: {sumOver.toFixed(2)}                    
                 </Typography>
                 <Typography display="block" align="center">
-                    Liczba kWh pobranych z sieci: {-1 * sumUnder}                    
+                    Liczba kWh pobranych z sieci: {(-1 * sumUnder).toFixed(2)}                    
                 </Typography>
                 <Typography display="block" align="center">
-                    Liczba kWh oddanych do sieci: {energyGivenToGrid}                    
+                    Liczba kWh oddanych do sieci: {energyGivenToGrid.toFixed(2)}                    
                 </Typography>
 
                 <Typography display="block" align="center">
-                    Liczba kWh pobranych bezpośrednio z fotowoltaiki: {energyFetchedDirectly}                    
+                    Liczba kWh pobranych bezpośrednio z fotowoltaiki: {energyFetchedDirectly.toFixed(2)}                    
                 </Typography>
 
-                <Typography display="block" align="center">
-                    Liczba kWh pobranych bezpośrednio z fotowoltaiki: {energyFetchedDirectly}                    
-                </Typography>
             </Paper>
             <Paper>
                 <Typography display="block" align="center">
@@ -111,15 +108,13 @@ export default function Page() {
                                        
                 </Typography>
                 <Typography display="block" align="center" sx={{ fontWeight: 'bold' }}>
-                    Params:
-                                       
+                    Params:           
                 </Typography>
                 <Typography display="block" align="center">
                     Miesiąc: {query["month"]}, Rok: {query["year"]}, Zużycie energii: {query["energy_usage"]}, 
                     Cena oddanej energii: {query["income_per_kwh"]}, Cena pobranej energii: {query["cost_per_kwh"]},
                     Koszty stałe: {query["transfer_cost"]}, Długość geograficzna: {query["latitude"]},
                     Szerokość geograficzna: {query["longitude"]}
-
                 </Typography>
             </Paper>
 
