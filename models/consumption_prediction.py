@@ -1,7 +1,8 @@
 import pandas as pd
 import json
+from datetime import datetime
 
-def predict(month_number: int, month_energy: float, model_path: str = 'consumption_model.json') -> dict:
+def predict(month_number: int, year_number, month_energy: float, model_path: str = 'consumption_model.json') -> dict:
     """
     Given a month number and its energy consumption, predict the minutely energy consumption over a year.
 
@@ -27,9 +28,45 @@ def predict(month_number: int, month_energy: float, model_path: str = 'consumpti
     # Estimate minutely values
     minutely_prediction = {}
     for minute_key, frac in minute_fraction.items():
-        minutely_prediction[minute_key] = frac * estimated_yearly_total
 
-    return minutely_prediction
+        try:
+
+            temp_datetime = f"{year_number}-" + minute_key
+
+            dt = datetime.strptime(temp_datetime, "%Y-%m-%d %H:%M")
+        
+        except Exception:
+
+            continue   
+
+        if dt.month == month_number:
+
+            minutely_prediction[str(dt)] = frac * estimated_yearly_total
+    
+    hourly_prediction = []
+
+    last_datetime = None
+
+    for minute_key in minutely_prediction.keys():
+
+        dt = datetime.strptime(minute_key, "%Y-%m-%d %H:%M:%S")
+
+        if last_datetime is None:
+            last_datetime = dt
+            hourly_prediction.append(minutely_prediction[minute_key])
+        
+        else:
+
+            if dt.month == last_datetime.month and dt.day == last_datetime.day \
+                and dt.hour == last_datetime.hour:
+
+                hourly_prediction[-1] += minutely_prediction[minute_key]
+            
+            else:
+                last_datetime = dt
+                hourly_prediction.append(minutely_prediction[minute_key])
+
+    return hourly_prediction
 
 
 # # Main used for generating the model

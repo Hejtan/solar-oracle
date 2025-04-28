@@ -85,7 +85,8 @@ def get_energy(energy_consumed_per_month_in_kwh, solar_power_in_kw, month, year,
     predicted_production = [0.0 if x < 0.0 else solar_power_in_kw / 15.21 * x for x in predicted_production]
     # 15,21 is solar panels power
 
-    predicted_consumption = consumption_prediction.predict(month_number=month, 
+    predicted_consumption = consumption_prediction.predict(month_number=month,
+                                                           year_number=year, 
                                                            month_energy=energy_consumed_per_month_in_kwh,
                                                            )
 
