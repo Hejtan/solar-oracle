@@ -84,6 +84,12 @@ export default function Page() {
                 <Typography display="block" align="center">
                     Opłata bez inwestycji w fotowoltaikę: {pln.format(costWithoutSolar)}
                 </Typography>
+                <Typography display="block" align="center">
+                    Liczba wyprodukowanych kWh: {sumOver}                    
+                </Typography>
+                <Typography display="block" align="center">
+                    Liczba pobranych kWh: {-1 * sumUnder}                    
+                </Typography>
             </Paper>
         </div>
     );
