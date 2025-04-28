@@ -2,6 +2,7 @@ import pickle
 import pandas as pd
 from datetime import datetime, timedelta
 import requests
+import consumption_prediction
 
 # Load the model
 with open('model.pkl', 'rb') as f:
@@ -84,8 +85,14 @@ def get_energy(energy_consumed_per_month_in_kwh, solar_power_in_kw, month, year,
     predicted_production = [0.0 if x < 0.0 else solar_power_in_kw / 15.21 * x for x in predicted_production]
     # 15,21 is solar panels power
 
+    predicted_consumption = consumption_prediction.predict(month_number=month, 
+                                                           month_energy=energy_consumed_per_month_in_kwh,
+                                                           )
+
     # Return predicted values
-    return({"Predicted energy production": predicted_production})
+    return({"Predicted energy production": predicted_production,
+            "Predicted energy consumption": predicted_consumption
+            })
 
 """
 How does it work:
