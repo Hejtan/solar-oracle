@@ -101,7 +101,28 @@ export default function Page() {
                     Liczba kWh pobranych bezpośrednio z fotowoltaiki: {energyFetchedDirectly}                    
                 </Typography>
 
+                <Typography display="block" align="center">
+                    Liczba kWh pobranych bezpośrednio z fotowoltaiki: {energyFetchedDirectly}                    
+                </Typography>
             </Paper>
+            <Paper>
+                <Typography display="block" align="center">
+                    =============================================================
+                                       
+                </Typography>
+                <Typography display="block" align="center" sx={{ fontWeight: 'bold' }}>
+                    Params:
+                                       
+                </Typography>
+                <Typography display="block" align="center">
+                    Miesiąc: {query["month"]}, Rok: {query["year"]}, Zużycie energii: {query["energy_usage"]}, 
+                    Cena oddanej energii: {query["income_per_kwh"]}, Cena pobranej energii: {query["cost_per_kwh"]},
+                    Koszty stałe: {query["transfer_cost"]}, Długość geograficzna: {query["latitude"]},
+                    Szerokość geograficzna: {query["longitude"]}
+
+                </Typography>
+            </Paper>
+
         </div>
     );
 }
