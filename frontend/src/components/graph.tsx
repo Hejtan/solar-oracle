@@ -53,7 +53,7 @@ export const Graph: React.FC<Props> = ({ color, data, year, month, label, unit }
                         label: label,
                         color,
                         area: true,
-                        data: data,
+                        data: data.map(data => parseFloat(data.toFixed(2))),
                         valueFormatter: (val) => `${val}${unit}`,
                         showMark: false,
                     },
