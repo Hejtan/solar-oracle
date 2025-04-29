@@ -19,19 +19,6 @@ export default function Home() {
         console.log(query);
         router.push("/output" + "?" + query);
     };
-    //     User input:
-    // - miesiąc
-    // - koszt energi w tym miesiącu
-    // - hajsy za kWh oddania
-    // - hajsy za kWh pobrania
-    // - hajsy za stały koszt przesyłu
-    // Mateusz
-    // moc fotowoltaiki
-    // Mateusz
-    // lokalizacja
-    // Mateusz
-    // Mateusz Urbańczyk
-    // ilość zużytej energii zamiast koszt energi w tym miesiącu
 
     return (
         <div>
@@ -76,14 +63,14 @@ export default function Home() {
                             />
                         </Box>
                         <Stack p={1} direction="row">
-                            <TextField sx={{flexGrow: 1}} label="szerokość geograficzna" name="latitude" />
-                            <TextField sx={{flexGrow: 1}} label="wysokość geograficzna" name="longitude" />
+                            <TextField sx={{flexGrow: 1}} label="szerokość geograficzna" name="longitude" />
+                            <TextField sx={{flexGrow: 1}} label="długość geograficzna" name="latitude" />
                         </Stack>
                         <Box p={1}>
                             <TextField fullWidth
                                 label="Moc fotowoltaiki"
                                 name="power"
-                                slotProps={unit("kW")}
+                                slotProps={unit("kWp")}
                             />
                         </Box>
                         <Button variant="contained" fullWidth type="submit">
